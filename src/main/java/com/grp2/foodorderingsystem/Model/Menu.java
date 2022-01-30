@@ -1,4 +1,8 @@
 package com.grp2.foodorderingsystem.Model;
 
-public class Menu {
+import java.io.Serializable;
+
+public class Menu implements Serializable {
+
+    private Food food;
 }
