@@ -15,6 +15,18 @@ public class Food implements Serializable {
     private int weight;
     private List<Addons> addonsList;
 
+    public Food(String foodName, Double foodPrice, int itemCount, String foodCode, String foodType,
+                int processTime, int weight) {
+        this.foodName = foodName;
+        this.foodPrice = foodPrice;
+        this.itemCount = itemCount;
+        this.foodCode = foodCode;
+        this.foodType = foodType;
+        this.isAvailable = true;
+        this.processTime = processTime;
+        this.weight = weight;
+    }
+
     public String getFoodName() {
         return foodName;
     }

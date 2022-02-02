@@ -1,21 +1,33 @@
 package com.grp2.foodorderingsystem.Model;
 
 import java.io.Serializable;
-import java.security.Timestamp;
 import java.util.List;
 
 public class Order implements Serializable {
 
     private int orderNo;
     private int tableNo;
-    private List<Food> foodList;
+    private List<OrderedFood> foodList;
     private Double totalBill;
     private int approximateTime;
     private Double discount;
     private int totalWeight;
-    private Timestamp createdTimestamp;
+    private int createdTimestamp;
     private String createdBy;
     private boolean isProcessing;
+
+    public Order(int orderNo, int tableNo, List<OrderedFood> foodList, Double totalBill, int approximateTime, Double discount,
+                 int createdTimestamp, String createdBy) {
+        this.orderNo = orderNo;
+        this.tableNo = tableNo;
+        this.foodList = foodList;
+        this.totalBill = totalBill;
+        this.approximateTime = approximateTime;
+        this.discount = discount;
+        this.createdTimestamp = createdTimestamp;
+        this.createdBy = createdBy;
+        this.isProcessing = false;
+    }
 
     public int getOrderNo() {
         return orderNo;
@@ -33,11 +45,11 @@ public class Order implements Serializable {
         this.tableNo = tableNo;
     }
 
-    public List<Food> getFoodList() {
+    public List<OrderedFood> getFoodList() {
         return foodList;
     }
 
-    public void setFoodList(List<Food> foodList) {
+    public void setFoodList(List<OrderedFood> foodList) {
         this.foodList = foodList;
     }
 
@@ -73,11 +85,11 @@ public class Order implements Serializable {
         this.totalWeight = totalWeight;
     }
 
-    public Timestamp getCreatedTimestamp() {
+    public int getCreatedTimestamp() {
         return createdTimestamp;
     }
 
-    public void setCreatedTimestamp(Timestamp createdTimestamp) {
+    public void setCreatedTimestamp(int createdTimestamp) {
         this.createdTimestamp = createdTimestamp;
     }
 
