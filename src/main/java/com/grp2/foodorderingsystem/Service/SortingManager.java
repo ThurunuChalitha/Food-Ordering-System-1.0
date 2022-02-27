@@ -54,8 +54,41 @@ public class SortingManager {
             }
         }
 
-//        if ()
+        radixSort(totalWeightList, totalWeightList.size());
+        System.out.println("AAAAAAAAAAAAAAAAAAAAa " + totalWeightList);
+    }
+
+    void radixSort(List<Integer> totalWeightList, int n) {
+
+        //get maximum item
         Integer max = Collections.max(totalWeightList);
-        System.out.println("AAAAAAAAAAAAAAAAAAAAa " + max);
+
+        for (int place = 1; max / place > 0; place *= 10) {
+            countingSort(totalWeightList, n, place);
+        }
+    }
+
+    // function to implement counting sort
+    void countingSort(List<Integer> totalWeightList, int n, int place) {
+        int[] output = new int[n+1];
+        int[] count = new int[10];
+
+        for (int i = 0; i < n; i++) {
+            count[(totalWeightList.get(i) / place) % 10]++;
+        }
+
+        for (int i = 1; i < 10; i++) {
+            count[i] += count[i - 1];
+        }
+
+        for (int i = n - 1; i >= 0; i--) {
+            output[count[(totalWeightList.get(i) / place) % 10] - 1] = totalWeightList.get(i);
+            count[(totalWeightList.get(i) / place) % 10]--;
+        }
+
+        totalWeightList.removeAll(totalWeightList);
+        for (int i = 0; i < n; i++) {
+            totalWeightList.add(output[i]);
+        }
     }
 }
