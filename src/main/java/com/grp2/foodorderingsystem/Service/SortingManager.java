@@ -15,7 +15,7 @@ public class SortingManager {
         sortingManager.weightingListOfOrders();
     }
 
-    private void weightingListOfOrders() {
+    public List<Integer> weightingListOfOrders() {
         OrderedFood riceAndCurriesWithOrderedCount = new OrderedFood("riceAndCurries", 700.00, 30,
                 "#001", "Sri Lankan", 5, 5);
         OrderedFood friedRiceWithOrderedCount = new OrderedFood("friedRice", 600.00, 20,
@@ -56,6 +56,8 @@ public class SortingManager {
 
         radixSort(totalWeightList, totalWeightList.size());
         System.out.println("AAAAAAAAAAAAAAAAAAAAa " + totalWeightList);
+
+        return totalWeightList;
     }
 
     void radixSort(List<Integer> totalWeightList, int n) {
