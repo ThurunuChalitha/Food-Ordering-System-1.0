@@ -19,7 +19,7 @@ public class SortedOrderListController implements Initializable {
 //    public ListView sortedListId;
 
     @FXML
-    private ListView sortedListId;
+    private ListView<String> sortedListId;
 
     @FXML
     private Label testId;
