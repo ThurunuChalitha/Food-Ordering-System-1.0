@@ -15,6 +15,7 @@ public class Order implements Serializable {
     private int createdTimestamp;
     private String createdBy;
     private boolean isProcessing;
+    private boolean orderStatus;
 
     public Order(int orderNo, int tableNo, List<OrderedFood> foodList, Double totalBill, int approximateTime, Double discount,
                  int createdTimestamp, String createdBy) {
@@ -109,6 +110,14 @@ public class Order implements Serializable {
         isProcessing = processing;
     }
 
+    public boolean isOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(boolean orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -122,6 +131,7 @@ public class Order implements Serializable {
                 ", createdTimestamp=" + createdTimestamp +
                 ", createdBy='" + createdBy + '\'' +
                 ", isProcessing=" + isProcessing +
+                ", orderStatus=" + orderStatus +
                 '}';
     }
 }
