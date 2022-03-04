@@ -3,12 +3,13 @@ package com.grp2.foodorderingsystem.Service;
 import com.grp2.foodorderingsystem.Model.Order;
 import com.grp2.foodorderingsystem.Model.OrderedFood;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class SortingManager {
+
+    //TODO - if order is processing then it should not be re-sort
+
+    private List<Order> ordersList = new ArrayList<>();
 
     public static void main(String[] args) {
         SortingManager sortingManager = new SortingManager();
@@ -34,14 +35,17 @@ public class SortingManager {
         Order order1 = new Order(1, 1, orderedFoodList1, 1500.00, 15, 5.00, 1643796681, "Dushyantha");
         Order order2 = new Order(2, 2, orderedFoodList2, 3000.00, 20, 5.00, 1643796581, "Dushyantha");
         Order order3 = new Order(3, 3, orderedFoodList3, 5000.00, 20, 5.00, 1643796481, "Dushyantha");
-        Order order4 = new Order(3, 3, orderedFoodList4, 6000.00, 25, 5.00, 1643796781, "Dushyantha");
+        Order order4 = new Order(4, 3, orderedFoodList4, 6000.00, 25, 5.00, 1643796781, "Dushyantha");
 
         order1.setTotalWeight(100);
         order2.setTotalWeight(200);
         order3.setTotalWeight(50);
         order4.setTotalWeight(150);
 
-        List<Order> ordersList = Arrays.asList(order1, order2, order3, order4);
+        ordersList.add(order1);
+        ordersList.add(order2);
+        ordersList.add(order4);
+//        List<Order> ordersList = Arrays.asList(order1, order2, order3, order4);
         List<Integer> totalWeightList = new ArrayList<>();
 
         //normal start
@@ -92,5 +96,24 @@ public class SortingManager {
         for (int i = 0; i < n; i++) {
             totalWeightList.add(output[i]);
         }
+    }
+
+    public Order addOrderToWeight(Order newOrder) {
+        Integer weightValue = 0;
+        if (newOrder != null) {
+            Integer approximateTimeInSeconds = convertMinutesToSeconds(newOrder.getApproximateTime());
+            weightValue = newOrder.getApproximateTime();
+            if (ordersList != null) {
+                for (int i = ordersList.size() - 1; i >= 0; i--) {
+
+//                    kalin record ekath ekka compare krla blnna time gap eka. pahala method eka lynna gaththe ekata
+                }
+            }
+        }
+        return null;
+    }
+
+    private Integer convertMinutesToSeconds(Integer minutes) {
+        return minutes * 60;
     }
 }
