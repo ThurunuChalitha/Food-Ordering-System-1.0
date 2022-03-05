@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import com.grp2.foodorderingsystem.Model.Food;
+import com.grp2.foodorderingsystem.Model.Order;
+import com.grp2.foodorderingsystem.Service.RedBlackTree;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.ChoiceBox;
@@ -31,11 +33,13 @@ public class InsertSceneController implements Initializable {
 	
 	private String[] food = {"pizza","sushi","ramen","Noodles","Coffee","Pasta","Soda","Garlic bread",
 			"Donut"};
-	
 	private Integer[] qFood = {1,2,3,4,5,6,7,8,9};
 	
 	private int i = 0;
 	
+	RedBlackTree bst = new RedBlackTree();
+	Order foodOrder = new Order(0, 0, null, null, 0, null, 0, null);
+
 	ArrayList<String> orderItem = new ArrayList<String>();
 	Map<String,ArrayList> map = new HashMap<>();
 	
@@ -46,21 +50,21 @@ public class InsertSceneController implements Initializable {
 			System.out.println("Error");
 		}
 		else {
-		orderItem.add(selectedFood);
-		fsListView.getItems().addAll(selectedFood);
-		map.put(Integer.toString(i), orderItem);
+			orderItem.add(selectedFood);
+			fsListView.getItems().addAll(selectedFood);
+			map.put(Integer.toString(i), orderItem);
 		}
 	}
 	
 	@FXML
 	public void btnConfirmOrder(ActionEvent event) {
 		String selectedFood = fsComboBox.getValue();
+	
+		foodOrder.setOrderNo(i);
+		oListView.getItems().addAll(Integer.toString(foodOrder.getOrderNo()));
 		
-		Food myFood = new Food(selectedFood, 7.99, 10, "F001", "Cooked", 10, 5);
-		
-//		for(int j=0;j<orderItem.size();j++) {
-		oListView.getItems().addAll(orderItem);
-		
+		bst.insert(foodOrder.getOrderNo());
+		bst.printTree();
 		System.out.println("No: "+i+" "+map.get("0"));
 		fsListView.getItems().clear();
 		orderItem.clear();
