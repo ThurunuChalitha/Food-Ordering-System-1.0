@@ -192,11 +192,11 @@ private void printHelper(Node root, String indent, boolean last) {
 }
 
 public RedBlackTree() {
- TNULL = new Node();
- TNULL.color = 0;
- TNULL.left = null;
- TNULL.right = null;
- root = TNULL;
+	TNULL = new Node();
+	TNULL.color = 0;
+	TNULL.left = null;
+	TNULL.right = null;
+	root = TNULL;
 }
 
 public void preorder() {
@@ -327,18 +327,18 @@ public void insert(int key) {
  }
 
  if (node.parent.parent == null) {
-   return;
+	return;
  }
 
- fixInsert(node);
+ 	fixInsert(node);
 }
 
 public Node getRoot() {
- return this.root;
+	return this.root;
 }
 
 public void printTree() {
- printHelper(this.root, "", true);
+	printHelper(this.root, "", true);
 }
 
 //public static void main(String[] args) {

@@ -9,6 +9,8 @@ module com.grp2.foodorderingsystem {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+	requires javafx.graphics;
+	requires javafx.base;
 
     opens com.grp2.foodorderingsystem to javafx.fxml;
     exports com.grp2.foodorderingsystem;

@@ -3,8 +3,10 @@ package com.grp2.foodorderingsystem;
 import com.grp2.foodorderingsystem.Model.OrderedFood;
 import com.grp2.foodorderingsystem.Service.SortingManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -15,9 +17,15 @@ import com.grp2.foodorderingsystem.Service.RedBlackTree;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 public class InsertSceneController implements Initializable {
-	
+	private Stage stage;
+	private Parent parent;
+	private Scene scene;
 	@FXML
 	private ChoiceBox<String> fsComboBox;
 	
@@ -78,11 +86,9 @@ public class InsertSceneController implements Initializable {
 		String selectedFood = fsComboBox.getValue();
 	
 		foodOrder.setOrderNo(i);
-		oListView.getItems().addAll(Integer.toString(foodOrder.getOrderNo()));
 		
-		bst.insert(foodOrder.getOrderNo());
-		bst.printTree();
-//		System.out.print();
+//		oListView.getItems().addAll(Integer.toString(foodOrder.getOrderNo()));
+
 		fsListView.getItems().clear();
 		qListView.getItems().clear();
 //		orderItem.clear();
@@ -121,7 +127,7 @@ public class InsertSceneController implements Initializable {
 			orderFoodItems.clear();
 			i++;
 		} else {
-			System.out.println("Please select the food items");
+			System.out.println("Please select a food items");
 		}
 //>>>>>>> a542a199bb3e66cdcb808f286e1ab74177d8fd6d
 	}
@@ -137,6 +143,16 @@ public class InsertSceneController implements Initializable {
 		qComboBox.getItems().addAll(qFood);
 		qComboBox.getSelectionModel().selectFirst();
 		fsComboBox.getSelectionModel().selectFirst();
+	}
+	
+	public void switchToScene2(ActionEvent event) throws IOException {
+		 Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
+		 stage = new Stage();
+//		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.setTitle("Order update");
+		  stage.show();
 	}
 	
 }
