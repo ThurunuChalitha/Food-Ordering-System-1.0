@@ -48,4 +48,9 @@ Thumbs.db
 *.mov
 *.wmv
 
+# eclipse files
+*.classpath
+.project
+.settings
+
 /bin/
