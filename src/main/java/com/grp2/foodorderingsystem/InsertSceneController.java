@@ -26,7 +26,9 @@ public class InsertSceneController implements Initializable {
 	
 	@FXML
 	private ListView<String> fsListView;
-	
+	@FXML
+	private ListView<String> qListView;
+
 	@FXML
 	private ListView<String> oListView;
 	
@@ -55,16 +57,17 @@ public class InsertSceneController implements Initializable {
 	@FXML
 	public void btnAdd(ActionEvent event) {
 		String selectedFoodName = fsComboBox.getValue();
-		if (selectedFoodName == null) {
+		int selectedQ = qComboBox.getValue();
+		if (selectedFoodName == null || selectedQ == 0) {
 			System.out.println("Error");
 		} else {
 			Food foodFromMap = foodMap.get(selectedFoodName);
 			OrderedFood orderedFood = new OrderedFood(foodFromMap.getFoodName(), foodFromMap.getFoodPrice(), foodFromMap.getItemCount(),
 					foodFromMap.getFoodCode(), foodFromMap.getFoodType(), foodFromMap.getProcessTime(), foodFromMap.getWeight());
-			orderedFood.setOrderedFoodCount(5);
+			orderedFood.setOrderedFoodCount(selectedQ);
 			orderFoodItems.add(orderedFood);
 
-			fsListView.getItems().addAll(selectedFoodName);
+			fsListView.getItems().addAll(selectedFoodName.concat("                       ").concat(Integer.toString(selectedQ)));
 		}
 	}
 	
@@ -115,7 +118,9 @@ public class InsertSceneController implements Initializable {
 		foodMap.put("Pasta", Pasta);
 
 		fsComboBox.getItems().addAll(food);
-//		qComboBox.getItems().addAll(qFood);
+		qComboBox.getItems().addAll(qFood);
+		qComboBox.getSelectionModel().selectFirst();
+		fsComboBox.getSelectionModel().selectFirst();
 	}
 	
 }
