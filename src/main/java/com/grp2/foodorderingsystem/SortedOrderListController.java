@@ -19,7 +19,7 @@ public class SortedOrderListController implements Initializable {
 //    public ListView sortedListId;
 
     @FXML
-    private ListView sortedListId;
+    private ListView<String> sortedListId;
 
     @FXML
     private Label testId;
@@ -35,10 +35,10 @@ public class SortedOrderListController implements Initializable {
         sortedListId = new ListView();
         SortingManager sortingManager = new SortingManager();
         ObservableList<String> items = FXCollections.observableArrayList();
-        for (Integer item : sortingManager.weightingListOfOrders()) {
-//            this.sortedListId.getItems().add(item);
-            items.add(String.valueOf(item));
-        }
+//        for (Integer item : sortingManager.weightingListOfOrders()) {
+////            this.sortedListId.getItems().add(item);
+//            items.add(String.valueOf(item));
+//        }
 //        sortedListId.add("Item 1");
 //        sortedListId.getItems().add("Item 2");
 //        sortedListId.getItems().add("Item 3");
