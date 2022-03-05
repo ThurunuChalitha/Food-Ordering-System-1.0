@@ -73,6 +73,7 @@ public class InsertSceneController implements Initializable {
 		bst.printTree();
 //		System.out.print();
 		fsListView.getItems().clear();
+		qListView.getItems().clear();
 //		orderItem.clear();
 		i++;
 	}
