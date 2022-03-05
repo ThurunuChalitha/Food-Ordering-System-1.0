@@ -102,8 +102,9 @@ public class SortingManager {
         }
     }
 
-    public void addOrderToWeight(Order newOrder) {
+    public List<Order> addOrderToWeight(Order newOrder) {
 //        ordersList.addAll(viewList);
+        System.out.println("LLLLLLLLLLLLLLLLLLLLLLL " + newOrder);
         int weightValue;
         if (newOrder != null) {
 //            int approximateTimeInSeconds = convertMinutesToSeconds(newOrder.getApproximateTime());
@@ -164,6 +165,7 @@ public class SortingManager {
                 viewList.add(orderNumberWithOrderMap.get(orderNo));
             }
         }
+        return viewList;
     }
 
     private Integer convertMinutesToSeconds(Integer minutes) {

@@ -12,7 +12,7 @@ public class Order implements Serializable {
     private int approximateTime;
     private Double discount;
     private int totalWeight;
-    private int createdTimestamp;
+    private long createdTimestamp;
     private String createdBy;
     private boolean isProcessing;
     private boolean orderStatus;
@@ -86,11 +86,11 @@ public class Order implements Serializable {
         this.totalWeight = totalWeight;
     }
 
-    public int getCreatedTimestamp() {
+    public long getCreatedTimestamp() {
         return createdTimestamp;
     }
 
-    public void setCreatedTimestamp(int createdTimestamp) {
+    public void setCreatedTimestamp(long createdTimestamp) {
         this.createdTimestamp = createdTimestamp;
     }
 
