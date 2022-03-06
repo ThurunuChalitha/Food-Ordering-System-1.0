@@ -184,4 +184,14 @@ public class InsertSceneController implements Initializable {
 		stage.setTitle("Order update");
 		stage.show();
 	}
+
+	@FXML
+	public void btnDelete(ActionEvent actionEvent) {
+		int selectedID =oListView.getSelectionModel().getSelectedIndex();
+		oListView.getItems().remove(selectedID);
+		bst.deleteNode(selectedID);
+		System.out.println("************************");
+		bst.printTree();
+
+	}
 }
