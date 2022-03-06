@@ -18,16 +18,19 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField; 
 
 public class InsertSceneController implements Initializable {
+
 	private Stage stage;
 	private Parent parent;
 	private Scene scene;
+
+	SortingManager sortingManager = new SortingManager();
+
 	@FXML
 	private ChoiceBox<String> fsComboBox;
 	
@@ -36,8 +39,15 @@ public class InsertSceneController implements Initializable {
 	
 	@FXML
 	private ListView<String> fsListView;
+
 	@FXML
 	private ListView<String> qListView;
+
+	@FXML
+	private ListView<String> searchListView;
+
+	@FXML
+	private ListView<String> searchListQuantityView;
 	
 	@FXML
 	private TextField searchKey;
@@ -48,13 +58,13 @@ public class InsertSceneController implements Initializable {
 	@FXML
 	private ListView<String> oListView;
 	
-	private String[] food = {"pizza","sushi","Pasta"};
-//	private String[] food = {"pizza","sushi","ramen","Noodles","Coffee","Pasta","Soda","Garlic bread",
-//	"Donut"};
+	private final String[] food = {"pizza","sushi","Pasta"};
+
 	private Integer[] qFood = {1,2,3,4,5,6,7,8,9};
+
+	private List<Integer> orderNoList = new ArrayList<>();
 	
 	private int i = 1;
-	private int searchId ;
 
 	private final Food pizza = new Food("pizza", 700.00, 30, "#001", "Sri Lankan",
 			5, 5);
@@ -66,11 +76,13 @@ public class InsertSceneController implements Initializable {
 			8, 8);
 
 	private Map<String, Food> foodMap = new HashMap<>();
-	
+
+	private final Map<Integer, Order> orderNumberWithOrderMap = new HashMap<>();
+
 	RedBlackTree bst = new RedBlackTree();
-	Order foodOrder = new Order(0, 0, null, null, 0, null, 0, null);
-	List<OrderedFood> orderFoodItems = new ArrayList<>();
-	
+
+	private final List<OrderedFood> orderFoodItems = new ArrayList<>();
+
 	@FXML
 	public void btnAdd(ActionEvent event) {
 		String selectedFoodName = fsComboBox.getValue();
@@ -88,66 +100,72 @@ public class InsertSceneController implements Initializable {
 			qListView.getItems().addAll(Integer.toString(selectedQ));
 		}
 	}
-	
 
 	public void btnSearch(ActionEvent event) {
-		searchId =  Integer.parseInt(searchKey.getText());
-		System.out.println(searchId);
+		searchListView.getItems().clear();
+		searchListQuantityView.getItems().clear();
+		if (searchKey.getText() != null || searchKey.getText() != " ") {
+			BinarySearch binarySearch = new BinarySearch();
+			int orderNo = binarySearch.searchOrder(orderNoList, searchKey.getText());
+
+			for (OrderedFood orderedFood : orderNumberWithOrderMap.get(orderNo).getFoodList()) {
+				searchListView.getItems().addAll(orderedFood.getFoodName());
+				searchListQuantityView.getItems().addAll(Integer.toString(orderedFood.getOrderedFoodCount()));
+			}
+		} else {
+			System.out.println("Please enter valid order number ");
+		}
 	}
-	
-	
-	
+
 	@FXML
 	public void btnConfirmOrder(ActionEvent event) {
-
-		String selectedFood = fsComboBox.getValue();
-	
-		foodOrder.setOrderNo(i);
-		
-//		oListView.getItems().addAll(Integer.toString(foodOrder.getOrderNo()));
-
 		fsListView.getItems().clear();
 		qListView.getItems().clear();
 
+		Order foodOrder = new Order(i, 0, orderFoodItems, 0.0, 0, null,
+				System.currentTimeMillis(), null);
 
 		if (!orderFoodItems.isEmpty()) {
 			double totalBill = 0.0;
 			int approximateTime = 0;
+			List<OrderedFood> orderedFoodList = new ArrayList<>();
 			for (OrderedFood orderedFood : orderFoodItems) {
 				if (orderedFood != null) {
 					totalBill = totalBill + orderedFood.getFoodPrice() * orderedFood.getOrderedFoodCount();
-					approximateTime = approximateTime + orderedFood.getProcessTime();
+					if (orderedFood.getOrderedFoodCount() > 2) {
+						approximateTime = approximateTime + orderedFood.getProcessTime() * (orderedFood.getOrderedFoodCount() / 2);
+					} else {
+						approximateTime = approximateTime + orderedFood.getProcessTime();
+					}
+					orderedFoodList.add(orderedFood);
 				}
 			}
-			foodOrder.setOrderNo(i);
-			foodOrder.setFoodList(orderFoodItems);
+
+			foodOrder.setFoodList(orderedFoodList);
 			foodOrder.setTotalBill(totalBill);
 			foodOrder.setApproximateTime(approximateTime);
 			foodOrder.setCreatedTimestamp(System.currentTimeMillis());
+			orderNumberWithOrderMap.put(i, foodOrder);
 
-			SortingManager sortingManager = new SortingManager();
 			List<Order> viewList = sortingManager.addOrderToWeight(foodOrder);
 
 			if (viewList != null) {
+				oListView.getItems().clear();
 				for (Order order : viewList) {
 					oListView.getItems().addAll(Integer.toString(order.getOrderNo()));
 				}
 			}
 
-//		oListView.getItems().addAll(Integer.toString(foodOrder.getOrderNo()));
-
 			bst.insert(foodOrder.getOrderNo());
+			orderNoList.add(i);
 			bst.printTree();
 
 			fsListView.getItems().clear();
-			orderFoodItems.clear();
 			i++;
-			searchId =  Integer.parseInt(searchKey.getText());
-			System.out.println(searchId);
+			orderFoodItems.clear();
 		} else {
 			System.out.println("Please select a food items");
 		}
-
 	}
 	
 	@Override
@@ -164,20 +182,26 @@ public class InsertSceneController implements Initializable {
 	}
 	
 	public void switchToScene2(ActionEvent event) throws IOException {
-		 Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
-		 stage = new Stage();
-//		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		  scene = new Scene(root);
-		  stage.setScene(scene);
-		  stage.setTitle("Order update");
-		  stage.show();
+		Parent root = FXMLLoader.load(getClass().getResource("scene2.fxml"));
+		stage = new Stage();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle("Order update");
+		stage.show();
+	}
+
+	@FXML
+	public void btnDelete(ActionEvent actionEvent) {
+		int selectedID =oListView.getSelectionModel().getSelectedIndex();
+		oListView.getItems().remove(selectedID);
+		bst.deleteNode(selectedID);
+		System.out.println("************************");
+		bst.printTree();
+
 	}
 
     public void btnComplete(ActionEvent actionEvent) {
 		int selectedIdComplete =oListView.getSelectionModel().getSelectedIndex();
 		oListView.getItems().remove(selectedIdComplete);
-
-
-
 	}
 }
