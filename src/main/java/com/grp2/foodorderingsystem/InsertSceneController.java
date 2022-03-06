@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField; 
 
 public class InsertSceneController implements Initializable {
 	private Stage stage;
@@ -36,15 +38,23 @@ public class InsertSceneController implements Initializable {
 	private ListView<String> fsListView;
 	@FXML
 	private ListView<String> qListView;
+	
+	@FXML
+	private TextField searchKey;
+	
+	@FXML
+	private Button sbtn;
 
 	@FXML
 	private ListView<String> oListView;
 	
-	private String[] food = {"pizza","sushi","ramen","Noodles","Coffee","Pasta","Soda","Garlic bread",
-			"Donut"};
+	private String[] food = {"pizza","sushi","Pasta"};
+//	private String[] food = {"pizza","sushi","ramen","Noodles","Coffee","Pasta","Soda","Garlic bread",
+//	"Donut"};
 	private Integer[] qFood = {1,2,3,4,5,6,7,8,9};
 	
 	private int i = 1;
+	private int searchId ;
 
 	private final Food pizza = new Food("pizza", 700.00, 30, "#001", "Sri Lankan",
 			5, 5);
@@ -59,7 +69,6 @@ public class InsertSceneController implements Initializable {
 	
 	RedBlackTree bst = new RedBlackTree();
 	Order foodOrder = new Order(0, 0, null, null, 0, null, 0, null);
-
 	List<OrderedFood> orderFoodItems = new ArrayList<>();
 	
 	@FXML
@@ -80,9 +89,17 @@ public class InsertSceneController implements Initializable {
 		}
 	}
 	
+
+	public void btnSearch(ActionEvent event) {
+		searchId =  Integer.parseInt(searchKey.getText());
+		System.out.println(searchId);
+	}
+	
+	
+	
 	@FXML
 	public void btnConfirmOrder(ActionEvent event) {
-//<<<<<<< HEAD
+
 		String selectedFood = fsComboBox.getValue();
 	
 		foodOrder.setOrderNo(i);
@@ -91,9 +108,8 @@ public class InsertSceneController implements Initializable {
 
 		fsListView.getItems().clear();
 		qListView.getItems().clear();
-//		orderItem.clear();
-//		i++;
-//=======
+
+
 		if (!orderFoodItems.isEmpty()) {
 			double totalBill = 0.0;
 			int approximateTime = 0;
@@ -126,10 +142,12 @@ public class InsertSceneController implements Initializable {
 			fsListView.getItems().clear();
 			orderFoodItems.clear();
 			i++;
+			searchId =  Integer.parseInt(searchKey.getText());
+			System.out.println(searchId);
 		} else {
 			System.out.println("Please select a food items");
 		}
-//>>>>>>> a542a199bb3e66cdcb808f286e1ab74177d8fd6d
+
 	}
 	
 	@Override
