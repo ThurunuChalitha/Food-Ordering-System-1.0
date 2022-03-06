@@ -45,6 +45,9 @@ public class InsertSceneController implements Initializable {
 
 	@FXML
 	private ListView<String> searchListView;
+
+	@FXML
+	private ListView<String> searchListQuantityView;
 	
 	@FXML
 	private TextField searchKey;
@@ -100,12 +103,14 @@ public class InsertSceneController implements Initializable {
 
 	public void btnSearch(ActionEvent event) {
 		searchListView.getItems().clear();
-		if (searchKey.getText() != null || searchKey.getText() != "") {
+		searchListQuantityView.getItems().clear();
+		if (searchKey.getText() != null || searchKey.getText() != " ") {
 			BinarySearch binarySearch = new BinarySearch();
 			int orderNo = binarySearch.searchOrder(orderNoList, searchKey.getText());
 
 			for (OrderedFood orderedFood : orderNumberWithOrderMap.get(orderNo).getFoodList()) {
 				searchListView.getItems().addAll(orderedFood.getFoodName());
+				searchListQuantityView.getItems().addAll(Integer.toString(orderedFood.getOrderedFoodCount()));
 			}
 		} else {
 			System.out.println("Please enter valid order number ");
