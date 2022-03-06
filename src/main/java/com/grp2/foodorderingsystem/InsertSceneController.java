@@ -172,5 +172,12 @@ public class InsertSceneController implements Initializable {
 		  stage.setTitle("Order update");
 		  stage.show();
 	}
-	
+
+    public void btnComplete(ActionEvent actionEvent) {
+		int selectedIdComplete =oListView.getSelectionModel().getSelectedIndex();
+		oListView.getItems().remove(selectedIdComplete);
+
+
+
+	}
 }
