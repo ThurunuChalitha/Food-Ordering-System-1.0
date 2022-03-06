@@ -2,6 +2,7 @@ package com.grp2.foodorderingsystem.Service;
 
 import com.grp2.foodorderingsystem.Model.Order;
 import com.grp2.foodorderingsystem.Model.OrderedFood;
+import com.grp2.foodorderingsystem.Service.RedBlackTree;
 
 import java.util.*;
 
@@ -171,4 +172,5 @@ public class SortingManager {
     private Integer convertMinutesToSeconds(Integer minutes) {
         return minutes * 60;
     }
+
 }
