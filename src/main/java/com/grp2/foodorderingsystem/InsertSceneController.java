@@ -116,7 +116,7 @@ public class InsertSceneController implements Initializable {
 			System.out.println("Please enter valid order number ");
 		}
 	}
-	
+
 	@FXML
 	public void btnConfirmOrder(ActionEvent event) {
 		fsListView.getItems().clear();
@@ -182,7 +182,7 @@ public class InsertSceneController implements Initializable {
 	}
 	
 	public void switchToScene2(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("scene2.fxml"));
 		stage = new Stage();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -197,6 +197,14 @@ public class InsertSceneController implements Initializable {
 		bst.deleteNode(selectedID);
 		System.out.println("************************");
 		bst.printTree();
+
+	}
+
+    public void btnComplete(ActionEvent actionEvent) {
+		int selectedIdComplete =oListView.getSelectionModel().getSelectedIndex();
+		oListView.getItems().remove(selectedIdComplete);
+
+
 
 	}
 }
