@@ -203,8 +203,5 @@ public class InsertSceneController implements Initializable {
     public void btnComplete(ActionEvent actionEvent) {
 		int selectedIdComplete =oListView.getSelectionModel().getSelectedIndex();
 		oListView.getItems().remove(selectedIdComplete);
-
-
-
 	}
 }
