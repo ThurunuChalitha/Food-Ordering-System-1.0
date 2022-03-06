@@ -18,7 +18,7 @@ public class Order implements Serializable {
     private boolean orderStatus;
 
     public Order(int orderNo, int tableNo, List<OrderedFood> foodList, Double totalBill, int approximateTime, Double discount,
-                 int createdTimestamp, String createdBy) {
+                 long createdTimestamp, String createdBy) {
         this.orderNo = orderNo;
         this.tableNo = tableNo;
         this.foodList = foodList;

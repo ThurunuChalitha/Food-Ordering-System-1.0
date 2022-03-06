@@ -7,12 +7,11 @@ import java.util.*;
 
 public class SortingManager {
 
-    private List<Order> ordersList = new ArrayList<>();
     private List<Order> processingList = new ArrayList<>();
-    private List<Order> toSortList = new ArrayList<>();
-    private List<Order> viewList = new ArrayList<>();
-    private Map<Integer, List<Integer>> orderNumberWithWeightMap = new HashMap<>();
-    private Map<Integer, Order> orderNumberWithOrderMap = new HashMap<>();
+    private List<Order> toSortList;
+    private List<Order> viewList;
+    private Map<Integer, List<Integer>> orderNumberWithWeightMap;
+    private Map<Integer, Order> orderNoWithOrderMap = new HashMap<>();
 
     public static void main(String[] args) {
         SortingManager sortingManager = new SortingManager();
@@ -20,6 +19,7 @@ public class SortingManager {
     }
 
     public void weightingListOfOrders() {
+        //mock for testing
         OrderedFood riceAndCurriesWithOrderedCount = new OrderedFood("riceAndCurries", 700.00, 30,
                 "#001", "Sri Lankan", 5, 5);
         OrderedFood friedRiceWithOrderedCount = new OrderedFood("friedRice", 600.00, 20,
@@ -43,29 +43,6 @@ public class SortingManager {
         addOrderToWeight(order1);
         addOrderToWeight(order2);
         addOrderToWeight(order4);
-//        order1.setTotalWeight(100);
-//        order2.setTotalWeight(200);
-//        order3.setTotalWeight(50);
-//        order4.setTotalWeight(150);
-
-        ordersList.add(order1);
-        ordersList.add(order2);
-        ordersList.add(order4);
-//        List<Order> ordersList = Arrays.asList(order1, order2, order3, order4);
-//        List<Integer> totalWeightList = new ArrayList<>();
-
-        //normal start
-        //if total weights are same then 1st comer should be first
-//        for (Order order : ordersList) {
-//            if (order != null) {
-//                if (order.getTotalWeight() != 0) {
-//                    totalWeightList.add(order.getTotalWeight());
-//                }
-//            }
-//        }
-
-//        radixSort(totalWeightList, totalWeightList.size());
-        System.out.println("AAAAAAAAAAAAAAAAAAAAa " + viewList);
     }
 
     private void radixSort(List<Integer> totalWeightList, int n) {
@@ -103,38 +80,35 @@ public class SortingManager {
     }
 
     public List<Order> addOrderToWeight(Order newOrder) {
-//        ordersList.addAll(viewList);
-        System.out.println("LLLLLLLLLLLLLLLLLLLLLLL " + newOrder);
-        int weightValue;
+        int weightValue = 0;
+        toSortList = new ArrayList<>();
+        viewList = new ArrayList<>();
+        orderNumberWithWeightMap = new HashMap<>();
+
         if (newOrder != null) {
-//            int approximateTimeInSeconds = convertMinutesToSeconds(newOrder.getApproximateTime());
-            weightValue = newOrder.getApproximateTime();
-            if (orderNumberWithOrderMap.size() >=  1) {
-                for (int i = orderNumberWithOrderMap.size(); i > 0; i--) {
-                    Order previousOrder = orderNumberWithOrderMap.get(i);
+            for (OrderedFood orderedFood : newOrder.getFoodList()) {
+                if (orderedFood.getOrderedFoodCount() > 2) {
+                    weightValue = weightValue + orderedFood.getWeight() * (orderedFood.getOrderedFoodCount() / 2);
+                } else {
+                    weightValue = weightValue + orderedFood.getWeight();
+                }
+            }
+            if (orderNoWithOrderMap.size() >=  1) {
+                for (int i = orderNoWithOrderMap.size(); i > 0; i--) {
+                    Order previousOrder = orderNoWithOrderMap.get(i);
                     if (previousOrder == null) {
                         continue;
                     }
                     if (previousOrder.isProcessing()) {
                         processingList.add(previousOrder);
                     } else {
-//                        if (convertMinutesToSeconds(previousOrder.getApproximateTime()) + previousOrder.getCreatedTimestamp() ==
-//                                (approximateTimeInSeconds + newOrder.getCreatedTimestamp())) {
-//                            while (weightValue < previousOrder.getTotalWeight()) {
-//                                weightValue++;
-//                            }
-//                        } else if (convertMinutesToSeconds(previousOrder.getApproximateTime()) + previousOrder.getCreatedTimestamp() <
-//                                (approximateTimeInSeconds + newOrder.getCreatedTimestamp())) {
-//                            while (weightValue > previousOrder.getTotalWeight()) {
-//                                weightValue--;
-//                            }
-//                        }
+                        toSortList.add(previousOrder);
                     }
                 }
             }
             newOrder.setTotalWeight(weightValue);
             toSortList.add(newOrder);
-            orderNumberWithOrderMap.put(newOrder.getOrderNo(), newOrder);
+            orderNoWithOrderMap.put(newOrder.getOrderNo(), newOrder);
         }
         List<Integer> totalWeightList = new ArrayList<>();
 
@@ -162,13 +136,9 @@ public class SortingManager {
 
         for (Integer weight : totalWeightList) {
             for (Integer orderNo : orderNumberWithWeightMap.get(weight)) {
-                viewList.add(orderNumberWithOrderMap.get(orderNo));
+                viewList.add(orderNoWithOrderMap.get(orderNo));
             }
         }
         return viewList;
-    }
-
-    private Integer convertMinutesToSeconds(Integer minutes) {
-        return minutes * 60;
     }
 }
