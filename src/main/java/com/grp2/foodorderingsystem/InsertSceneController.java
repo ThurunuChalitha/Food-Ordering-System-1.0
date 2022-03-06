@@ -190,6 +190,16 @@ public class InsertSceneController implements Initializable {
 		stage.show();
 	}
 
+	public void switchToScene3(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("newItemScene.fxml"));
+		stage = new Stage();
+//		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle("Add Item");
+		stage.show();
+	}
+
 	@FXML
 	public void btnDelete(ActionEvent actionEvent) {
 		int selectedID =oListView.getSelectionModel().getSelectedIndex();
