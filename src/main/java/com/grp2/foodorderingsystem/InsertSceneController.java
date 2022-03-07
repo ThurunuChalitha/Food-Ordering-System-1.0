@@ -76,7 +76,6 @@ public class InsertSceneController implements Initializable {
 
     RedBlackTree bst = new RedBlackTree();
 
-
     private final List<OrderedFood> orderFoodItems = new ArrayList<>();
     private Boolean isUpdated = false;
     private int updateOrderNumber;
@@ -110,15 +109,23 @@ public class InsertSceneController implements Initializable {
     public void btnSearch(ActionEvent event) {
         searchListView.getItems().clear();
         searchListQuantityView.getItems().clear();
-        if (searchKey.getText() != null || searchKey.getText() != " ") {
-            BinarySearch binarySearch = new BinarySearch();
-            int orderNo = binarySearch.searchOrder(orderNoList, searchKey.getText());
-
-            for (OrderedFood orderedFood : orderNumberWithOrderMap.get(orderNo).getFoodList()) {
-                searchListView.getItems().addAll(orderedFood.getFoodName());
-                searchListQuantityView.getItems().addAll(Integer.toString(orderedFood.getOrderedFoodCount()));
+        try {
+            int key = Integer.parseInt(searchKey.getText());
+            if (orderNumberWithOrderMap.size() != 0) {
+                if (orderNumberWithOrderMap.get(key) == null) {
+                    System.out.println("There are no any order found for given key " + key);
+                } else {
+                    BinarySearch binarySearch = new BinarySearch();
+                    int orderNo = binarySearch.searchOrder(orderNoList, searchKey.getText());
+                    for (OrderedFood orderedFood : orderNumberWithOrderMap.get(orderNo).getFoodList()) {
+                        searchListView.getItems().addAll(orderedFood.getFoodName());
+                        searchListQuantityView.getItems().addAll(Integer.toString(orderedFood.getOrderedFoodCount()));
+                    }
+                }
+            } else {
+                System.out.println("There are no any orders to search");
             }
-        } else {
+        } catch (NumberFormatException e) {
             System.out.println("Please enter valid order number ");
         }
     }
@@ -227,6 +234,7 @@ public class InsertSceneController implements Initializable {
         int selectedID = oListView.getSelectionModel().getSelectedIndex();
         String selectedItem = oListView.getSelectionModel().getSelectedItem();
         oListView.getItems().remove(selectedID);
+        sortingManager.deleteOrder(Integer.parseInt(selectedItem));
         bst.deleteNode(selectedID);
         orderNumberWithOrderMap.remove(Integer.parseInt(selectedItem));
         bst.printTree();
@@ -235,6 +243,10 @@ public class InsertSceneController implements Initializable {
     @FXML
     public void btnComplete(ActionEvent actionEvent) {
         int selectedIdComplete = oListView.getSelectionModel().getSelectedIndex();
+        String selectedItem = oListView.getSelectionModel().getSelectedItem();
+        Order order = orderNumberWithOrderMap.get(Integer.parseInt(selectedItem));
+        order.setProcessing(true);
+        sortingManager.markProcessingAndCompleteOrders(order);
         oListView.getItems().remove(selectedIdComplete);
     }
 

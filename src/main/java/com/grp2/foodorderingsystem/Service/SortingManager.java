@@ -147,4 +147,12 @@ public class SortingManager {
         }
         return viewList;
     }
+
+    public void deleteOrder(int orderNumber) {
+        orderNoWithOrderMap.remove(orderNumber, orderNoWithOrderMap.get(orderNumber));
+    }
+
+    public void markProcessingAndCompleteOrders(Order processingOrder) {
+        orderNoWithOrderMap.replace(processingOrder.getOrderNo(), orderNoWithOrderMap.get(processingOrder.getOrderNo()), processingOrder);
+    }
 }
