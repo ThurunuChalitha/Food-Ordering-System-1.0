@@ -1,6 +1,6 @@
 package com.grp2.foodorderingsystem.Model;
 
-public class OrderedFood extends Food{
+public class OrderedFood extends Food {
 
     private int orderedFoodCount;
 

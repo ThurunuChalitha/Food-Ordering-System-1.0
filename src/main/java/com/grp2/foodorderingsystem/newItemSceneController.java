@@ -1,7 +1,6 @@
 package com.grp2.foodorderingsystem;
 
 import com.grp2.foodorderingsystem.Model.Food;
-import com.grp2.foodorderingsystem.Model.OrderedFood;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,12 +40,12 @@ public class newItemSceneController implements Initializable {
     @FXML
     private ChoiceBox<String> cmbFoodType;
 
-    private final String[] foodType = {"Sri Lankan","Indian","Chinese"};
-    private  int i =0;
+    private final String[] foodType = {"Sri Lankan", "Indian", "Chinese"};
+    private int i = 0;
 
     @FXML
     public void btnAddNewItem(ActionEvent event) throws IOException {
-        if(newFoodName.getText() != null || newFoodCode.getText() != null || unitPrice.getText() != null) {
+        if (newFoodName.getText() != null || newFoodCode.getText() != null || unitPrice.getText() != null) {
             Food addNewItem = new Food(newFoodName.getText(), Double.parseDouble(unitPrice.getText()),
                     Integer.parseInt(newFoodCount.getText()),
                     newFoodCode.getText(), cmbFoodType.getValue(), Integer.parseInt(processTime.getText()),
@@ -57,28 +56,29 @@ public class newItemSceneController implements Initializable {
             root = loader.load();
 
             InsertSceneController insertSceneController = loader.getController();
-            insertSceneController.displayName(newFoodName.getText(),i);
-            insertSceneController.insertNewFood(newFoodName.getText(),addNewItem);
+            insertSceneController.displayName(newFoodName.getText(), i);
+            insertSceneController.insertNewFood(newFoodName.getText(), addNewItem);
             insertSceneController.refresh();
             i++;
 
-        }
-        else {
+        } else {
             System.out.println("Please enter valid details");
         }
     }
+
     @FXML
-    public void btnClose(ActionEvent event){
+    public void btnClose(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertScene.fxml"));
         stage = new Stage();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Food Ordering System!");
         stage.show();
     }
+
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1){
+    public void initialize(URL arg0, ResourceBundle arg1) {
         cmbFoodType.getItems().addAll(foodType);
         cmbFoodType.getSelectionModel().selectFirst();
     }

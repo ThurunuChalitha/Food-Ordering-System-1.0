@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class SortedOrderListController implements Initializable {
