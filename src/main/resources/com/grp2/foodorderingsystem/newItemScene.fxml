@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="262.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp2.foodorderingsystem.newItemSceneController">
+   <children>
+      <TextField fx:id="newFoodName" layoutX="39.0" layoutY="45.0" />
+      <TextField fx:id="newFoodCode" layoutX="39.0" layoutY="107.0" />
+      <TextField fx:id="newFoodCount" layoutX="39.0" layoutY="168.0" />
+      <TextField fx:id="unitPrice" layoutX="218.0" layoutY="45.0" />
+      <TextField fx:id="processTime" layoutX="218.0" layoutY="107.0" />
+      <Button layoutX="39.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnAddNewItem" prefHeight="25.0" prefWidth="330.0" text="Add Item" />
+      <Label layoutX="39.0" layoutY="24.0" text="Food Name:" />
+      <Label layoutX="41.0" layoutY="82.0" text="Food Code:" />
+      <Label layoutX="40.0" layoutY="148.0" text="Item Count:" />
+      <Label layoutX="216.0" layoutY="148.0" text="Food Type:" />
+      <Label layoutX="218.0" layoutY="24.0" text="Unit Price:" />
+      <Label layoutX="218.0" layoutY="82.0" text="Process Time:" />
+      <ChoiceBox fx:id="cmbFoodType" layoutX="218.0" layoutY="168.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

@@ -58,13 +58,16 @@ public class InsertSceneController implements Initializable {
 	@FXML
 	private ListView<String> oListView;
 	
-	private final String[] food = {"pizza","sushi","Pasta"};
+//	private final String[] food = {"pizza","pasta"};
 
 	private Integer[] qFood = {1,2,3,4,5,6,7,8,9};
 
 	private List<Integer> orderNoList = new ArrayList<>();
+
+	private List<String> food = new ArrayList<>();
 	
 	private int i = 1;
+
 
 	private final Food pizza = new Food("pizza", 700.00, 30, "#001", "Sri Lankan",
 			5, 5);
@@ -81,9 +84,21 @@ public class InsertSceneController implements Initializable {
 
 	RedBlackTree bst = new RedBlackTree();
 
+
 	private final List<OrderedFood> orderFoodItems = new ArrayList<>();
 	private Boolean isUpdated = false;
 	private int updateOrderNumber;
+
+	public InsertSceneController() {
+	}
+
+	public void displayName(String newfoodName, Integer k){
+//		food[k] = newfoodName;
+//		fsComboBox.getItems().addAll(food);
+		food.add(newfoodName);
+		System.out.println("++++++++++++++++++++++++++++++"+newfoodName);
+
+	}
 
 	@FXML
 	public void btnAdd(ActionEvent event) {
@@ -183,7 +198,9 @@ public class InsertSceneController implements Initializable {
 		foodMap.put("sushi", sushi);
 		foodMap.put("Pasta", Pasta);
 
-		fsComboBox.getItems().addAll(food);
+		for (Food food : foodMap.values()) {
+			fsComboBox.getItems().addAll(food.getFoodName());
+		}
 		qComboBox.getItems().addAll(qFood);
 		qComboBox.getSelectionModel().selectFirst();
 		fsComboBox.getSelectionModel().selectFirst();
@@ -205,6 +222,16 @@ public class InsertSceneController implements Initializable {
 
 	}
 
+	public void switchToScene3(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("newItemScene.fxml"));
+		stage = new Stage();
+//		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle("Add Item");
+		stage.show();
+	}
+
 	@FXML
 	public void btnDelete(ActionEvent actionEvent) {
 		int selectedID =oListView.getSelectionModel().getSelectedIndex();
@@ -217,6 +244,14 @@ public class InsertSceneController implements Initializable {
     public void btnComplete(ActionEvent actionEvent) {
 		int selectedIdComplete =oListView.getSelectionModel().getSelectedIndex();
 		oListView.getItems().remove(selectedIdComplete);
+
+	}
+
+	public void insertNewFood(String foodName, Food newFood){
+		foodMap.put(foodName, newFood);
+		fsComboBox.getItems().addAll(foodMap.get(foodName).getFoodName());
+//		fsComboBox.getItems().add(foodMap.get("pizza").getFoodName());
+		System.out.println("33333333333333333333333333333333333333" + foodMap);
 	}
 
 	@FXML

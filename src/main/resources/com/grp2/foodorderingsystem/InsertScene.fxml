@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
@@ -31,14 +33,24 @@
       <Label layoutX="320.0" layoutY="25.0" text="Order List" />
       <Line endX="-106.0" endY="257.0" layoutX="708.0" layoutY="126.0" startX="-106.0" startY="-103.0" />
       <Line endX="167.0" layoutX="714.0" layoutY="249.0" startX="-100.0" />
-      <ListView fx:id="searchListView" layoutX="614.0" layoutY="84.0" prefHeight="154.0" prefWidth="191.0" />
+      <ListView fx:id="searchListView" layoutX="614.0" layoutY="84.0" prefHeight="154.0" prefWidth="220.0" />
       <TextField fx:id="searchKey" layoutX="616.0" layoutY="41.0" prefHeight="25.0" prefWidth="176.0" />
       <Label layoutX="614.0" layoutY="25.0" text="Search" />
       <Label layoutX="614.0" layoutY="262.0" text="Update Menu" />
-      <Button layoutX="614.0" layoutY="355.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="268.0" text="Add New Item" />
+      <Button layoutX="614.0" layoutY="355.0" mnemonicParsing="false" onAction="#switchToScene3" prefHeight="25.0" prefWidth="268.0" text="Add New Item" />
       <ListView fx:id="qListView" layoutX="263.0" layoutY="79.0" prefHeight="258.0" prefWidth="37.0" />
-      <ListView fx:id="searchListQuantityView" layoutX="812.0" layoutY="86.0" prefHeight="154.0" prefWidth="59.0" />
+      <ListView fx:id="searchListQuantityView" layoutX="841.0" layoutY="84.0" prefHeight="154.0" prefWidth="37.0" />
       <Button layoutX="800.0" layoutY="41.0" mnemonicParsing="false" onAction="#btnSearch" prefHeight="25.0" prefWidth="82.0" text="Search" />
       <Button layoutX="213.0" layoutY="355.0" mnemonicParsing="false" onAction="#btnRemoveSelectItem" prefHeight="25.0" prefWidth="81.0" text="Remove" />
+      <ImageView fitHeight="297.0" fitWidth="266.0" layoutX="320.0" layoutY="66.0" opacity="0.25" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@fast-food.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="73.0" layoutX="693.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@hamburger.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
