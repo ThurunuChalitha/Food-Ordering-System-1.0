@@ -103,13 +103,19 @@ public class SortingManager {
                     if (previousOrder.isProcessing()) {
                         processingList.add(previousOrder);
                     } else {
-                        toSortList.add(previousOrder);
+                        if (previousOrder.getOrderNo() != newOrder.getOrderNo()) {
+                            toSortList.add(previousOrder);
+                        }
                     }
                 }
             }
             newOrder.setTotalWeight(weightValue);
+            if (orderNoWithOrderMap.containsKey(newOrder.getOrderNo())) {
+                orderNoWithOrderMap.replace(newOrder.getOrderNo(), orderNoWithOrderMap.get(newOrder.getOrderNo()), newOrder);
+            } else {
+                orderNoWithOrderMap.put(newOrder.getOrderNo(), newOrder);
+            }
             toSortList.add(newOrder);
-            orderNoWithOrderMap.put(newOrder.getOrderNo(), newOrder);
         }
         List<Integer> totalWeightList = new ArrayList<>();
 

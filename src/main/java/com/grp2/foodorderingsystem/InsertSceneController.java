@@ -82,6 +82,8 @@ public class InsertSceneController implements Initializable {
 	RedBlackTree bst = new RedBlackTree();
 
 	private final List<OrderedFood> orderFoodItems = new ArrayList<>();
+	private Boolean isUpdated = false;
+	private int updateOrderNumber;
 
 	@FXML
 	public void btnAdd(ActionEvent event) {
@@ -145,7 +147,14 @@ public class InsertSceneController implements Initializable {
 			foodOrder.setTotalBill(totalBill);
 			foodOrder.setApproximateTime(approximateTime);
 			foodOrder.setCreatedTimestamp(System.currentTimeMillis());
-			orderNumberWithOrderMap.put(i, foodOrder);
+			if (isUpdated) {
+				foodOrder.setOrderNo(updateOrderNumber);
+				orderNumberWithOrderMap.replace(updateOrderNumber, orderNumberWithOrderMap.get(updateOrderNumber), foodOrder);
+			} else {
+				orderNumberWithOrderMap.put(i, foodOrder);
+				orderNoList.add(i);
+				i++;
+			}
 
 			List<Order> viewList = sortingManager.addOrderToWeight(foodOrder);
 
@@ -157,12 +166,11 @@ public class InsertSceneController implements Initializable {
 			}
 
 			bst.insert(foodOrder.getOrderNo());
-			orderNoList.add(i);
 			bst.printTree();
 
 			fsListView.getItems().clear();
-			i++;
 			orderFoodItems.clear();
+			isUpdated = false;
 		} else {
 			System.out.println("Please select a food items");
 		}
@@ -180,14 +188,21 @@ public class InsertSceneController implements Initializable {
 		qComboBox.getSelectionModel().selectFirst();
 		fsComboBox.getSelectionModel().selectFirst();
 	}
-	
-	public void switchToScene2(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("scene2.fxml"));
-		stage = new Stage();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Order update");
-		stage.show();
+
+	@FXML
+	public void updateOrder(ActionEvent event) {
+		try {
+			updateOrderNumber = Integer.parseInt(oListView.getSelectionModel().getSelectedItem());
+			for (OrderedFood orderedFood : orderNumberWithOrderMap.get(updateOrderNumber).getFoodList()) {
+				fsListView.getItems().addAll(orderedFood.getFoodName());
+				qListView.getItems().addAll(Integer.toString(orderedFood.getOrderedFoodCount()));
+				orderFoodItems.add(orderedFood);
+				isUpdated = true;
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("Please select the order");
+		}
+
 	}
 
 	@FXML
@@ -197,11 +212,24 @@ public class InsertSceneController implements Initializable {
 		bst.deleteNode(selectedID);
 		System.out.println("************************");
 		bst.printTree();
-
 	}
 
     public void btnComplete(ActionEvent actionEvent) {
 		int selectedIdComplete =oListView.getSelectionModel().getSelectedIndex();
 		oListView.getItems().remove(selectedIdComplete);
+	}
+
+	@FXML
+	public void btnRemoveSelectItem(ActionEvent actionEvent) {
+		int selectedID = fsListView.getSelectionModel().getSelectedIndex();
+		String selectedFood = fsListView.getSelectionModel().getSelectedItem();
+		fsListView.getItems().remove(selectedID);
+		qListView.getItems().remove(selectedID);
+		for (int j = 0; j < orderFoodItems.size(); j++) {
+			if (orderFoodItems.get(j).getFoodName().equals(selectedFood)) {
+				orderFoodItems.remove(j);
+			}
+		}
+		System.out.println("Ordered food item is removed");
 	}
 }

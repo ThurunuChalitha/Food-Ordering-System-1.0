@@ -30,6 +30,8 @@ public class Order implements Serializable {
         this.isProcessing = false;
     }
 
+    public Order(){}
+
     public int getOrderNo() {
         return orderNo;
     }
