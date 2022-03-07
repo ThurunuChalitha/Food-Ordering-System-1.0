@@ -15,6 +15,7 @@ import com.grp2.foodorderingsystem.Model.Order;
 import com.grp2.foodorderingsystem.Service.RedBlackTree;
 
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -206,6 +207,9 @@ public class InsertSceneController implements Initializable {
 		fsComboBox.getSelectionModel().selectFirst();
 	}
 
+	public void refresh(){
+	}
+
 	@FXML
 	public void updateOrder(ActionEvent event) {
 		try {
@@ -225,7 +229,7 @@ public class InsertSceneController implements Initializable {
 	public void switchToScene3(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("newItemScene.fxml"));
 		stage = new Stage();
-//		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Add Item");
@@ -239,11 +243,13 @@ public class InsertSceneController implements Initializable {
 		bst.deleteNode(selectedID);
 		System.out.println("************************");
 		bst.printTree();
-	}
 
+	}
+	@FXML
     public void btnComplete(ActionEvent actionEvent) {
 		int selectedIdComplete =oListView.getSelectionModel().getSelectedIndex();
 		oListView.getItems().remove(selectedIdComplete);
+//		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 
 	}
 

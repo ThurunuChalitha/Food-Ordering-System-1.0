@@ -6,9 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +20,8 @@ import java.util.ResourceBundle;
 public class newItemSceneController implements Initializable {
 
     private Parent root;
+    private Stage stage;
+    private Scene scene;
 
     @FXML
     private TextField newFoodName;
@@ -54,6 +59,7 @@ public class newItemSceneController implements Initializable {
             InsertSceneController insertSceneController = loader.getController();
             insertSceneController.displayName(newFoodName.getText(),i);
             insertSceneController.insertNewFood(newFoodName.getText(),addNewItem);
+            insertSceneController.refresh();
             i++;
 
         }
@@ -61,7 +67,16 @@ public class newItemSceneController implements Initializable {
             System.out.println("Please enter valid details");
         }
     }
-
+    @FXML
+    public void btnClose(ActionEvent event){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertScene.fxml"));
+        stage = new Stage();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Food Ordering System!");
+        stage.show();
+    }
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         cmbFoodType.getItems().addAll(foodType);
