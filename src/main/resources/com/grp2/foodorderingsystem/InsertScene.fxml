@@ -15,15 +15,15 @@
             <Insets />
          </opaqueInsets></ChoiceBox>
       <Button layoutX="241.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnAdd" prefHeight="25.0" prefWidth="59.0" text="ADD" />
-      <Label layoutX="21.0" layoutY="15.0" prefHeight="17.0" prefWidth="91.0" text="Select a Food">
+      <Label layoutX="21.0" layoutY="15.0" prefHeight="17.0" prefWidth="91.0" text="Select an item">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="182.0" layoutY="15.0" prefHeight="17.0" prefWidth="59.0" text="Quantity">
+      <Label layoutX="182.0" layoutY="15.0" prefHeight="17.0" prefWidth="59.0" text="Qty">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Button layoutX="24.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnConfirmOrder" prefHeight="25.0" prefWidth="176.0" text="Confim Order">
+      <Button layoutX="24.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnConfirmOrder" prefHeight="25.0" prefWidth="176.0" text="Confirm Order">
          <font>
             <Font size="14.0" />
          </font></Button>
