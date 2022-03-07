@@ -37,6 +37,7 @@ public class newItemSceneController implements Initializable {
     private ChoiceBox<String> cmbFoodType;
 
     private final String[] foodType = {"Sri Lankan","Indian","Chinese"};
+    private  int i =0;
 
     @FXML
     public void btnAddNewItem(ActionEvent event) throws IOException {
@@ -51,8 +52,9 @@ public class newItemSceneController implements Initializable {
             root = loader.load();
 
             InsertSceneController insertSceneController = loader.getController();
-            insertSceneController.displayName(newFoodName.getText());
-            insertSceneController.insertNewFood(addNewItem);
+            insertSceneController.displayName(newFoodName.getText(),i);
+            insertSceneController.insertNewFood(newFoodName.getText(),addNewItem);
+            i++;
 
         }
         else {

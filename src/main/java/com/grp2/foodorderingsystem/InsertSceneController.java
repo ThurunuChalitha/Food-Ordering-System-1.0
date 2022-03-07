@@ -58,15 +58,16 @@ public class InsertSceneController implements Initializable {
 	@FXML
 	private ListView<String> oListView;
 	
-	private final String[] food = {"pizza","pasta"};
+//	private final String[] food = {"pizza","pasta"};
 
 	private Integer[] qFood = {1,2,3,4,5,6,7,8,9};
 
 	private List<Integer> orderNoList = new ArrayList<>();
 
-//	private List<String> food = new ArrayList<>();
+	private List<String> food = new ArrayList<>();
 	
 	private int i = 1;
+
 
 	private final Food pizza = new Food("pizza", 700.00, 30, "#001", "Sri Lankan",
 			5, 5);
@@ -89,11 +90,11 @@ public class InsertSceneController implements Initializable {
 	public InsertSceneController() {
 	}
 
-	public void displayName(String newfoodName){
-		food[0] = newfoodName;
+	public void displayName(String newfoodName, Integer k){
+//		food[k] = newfoodName;
 //		fsComboBox.getItems().addAll(food);
+		food.add(newfoodName);
 		System.out.println("++++++++++++++++++++++++++++++"+newfoodName);
-
 
 	}
 
@@ -188,7 +189,7 @@ public class InsertSceneController implements Initializable {
 		foodMap.put("pizza", pizza);
 		foodMap.put("sushi", sushi);
 		foodMap.put("Pasta", Pasta);
-		System.out.println("#########aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+food[0]);
+//		System.out.println("#########aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+food[0]);
 		fsComboBox.getItems().addAll(food);
 		qComboBox.getItems().addAll(qFood);
 		qComboBox.getSelectionModel().selectFirst();
@@ -227,11 +228,11 @@ public class InsertSceneController implements Initializable {
     public void btnComplete(ActionEvent actionEvent) {
 		int selectedIdComplete =oListView.getSelectionModel().getSelectedIndex();
 		oListView.getItems().remove(selectedIdComplete);
+
 	}
-	
 
-
-	public void insertNewFood(Food newFood){
-
+	public void insertNewFood(String foodname,Food newFood){
+		foodMap.put(foodname,newFood);
+		System.out.println("33333333333333333333333333333333333333"+foodMap);
 	}
 }
