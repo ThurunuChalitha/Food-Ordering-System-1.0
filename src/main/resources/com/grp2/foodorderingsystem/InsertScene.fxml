@@ -27,7 +27,7 @@
       <ListView fx:id="oListView" layoutX="320.0" layoutY="54.0" prefHeight="290.0" prefWidth="266.0" />
       <Button fx:id="idComplete" layoutX="453.0" layoutY="355.0" mnemonicParsing="false" onAction="#btnComplete" text="Complete" />
       <Button layoutX="535.0" layoutY="355.0" mnemonicParsing="false" text="Delete" textFill="RED" />
-      <Button layoutX="453.0" layoutY="355.0" mnemonicParsing="false" text="Complete" />
+      <Button layoutX="453.0" layoutY="355.0" mnemonicParsing="false" onAction="#btnComplete" text="Complete" />
       <Button fx:id="btnDel" layoutX="535.0" layoutY="355.0" mnemonicParsing="false" onAction="#btnDelete" text="Delete" textFill="RED" />
       <Button layoutX="319.0" layoutY="355.0" mnemonicParsing="false" onAction="#updateOrder" text="Update" />
       <Label layoutX="320.0" layoutY="25.0" text="Order List" />
@@ -42,11 +42,6 @@
       <ListView fx:id="searchListQuantityView" layoutX="841.0" layoutY="84.0" prefHeight="154.0" prefWidth="37.0" />
       <Button layoutX="800.0" layoutY="41.0" mnemonicParsing="false" onAction="#btnSearch" prefHeight="25.0" prefWidth="82.0" text="Search" />
       <Button layoutX="213.0" layoutY="355.0" mnemonicParsing="false" onAction="#btnRemoveSelectItem" prefHeight="25.0" prefWidth="81.0" text="Remove" />
-      <ImageView fitHeight="297.0" fitWidth="266.0" layoutX="320.0" layoutY="66.0" opacity="0.25" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@fast-food.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="62.0" fitWidth="73.0" layoutX="693.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@hamburger.png" />
