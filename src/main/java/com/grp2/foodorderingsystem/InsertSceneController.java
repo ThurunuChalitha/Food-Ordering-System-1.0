@@ -58,11 +58,13 @@ public class InsertSceneController implements Initializable {
 	@FXML
 	private ListView<String> oListView;
 	
-	private final String[] food = {"pizza","sushi","Pasta"};
+	private final String[] food = {"pizza","pasta"};
 
 	private Integer[] qFood = {1,2,3,4,5,6,7,8,9};
 
 	private List<Integer> orderNoList = new ArrayList<>();
+
+//	private List<String> food = new ArrayList<>();
 	
 	private int i = 1;
 
@@ -81,7 +83,19 @@ public class InsertSceneController implements Initializable {
 
 	RedBlackTree bst = new RedBlackTree();
 
+
 	private final List<OrderedFood> orderFoodItems = new ArrayList<>();
+
+	public InsertSceneController() {
+	}
+
+	public void displayName(String newfoodName){
+		food[0] = newfoodName;
+//		fsComboBox.getItems().addAll(food);
+		System.out.println("++++++++++++++++++++++++++++++"+newfoodName);
+
+
+	}
 
 	@FXML
 	public void btnAdd(ActionEvent event) {
@@ -174,7 +188,7 @@ public class InsertSceneController implements Initializable {
 		foodMap.put("pizza", pizza);
 		foodMap.put("sushi", sushi);
 		foodMap.put("Pasta", Pasta);
-
+		System.out.println("#########aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+food[0]);
 		fsComboBox.getItems().addAll(food);
 		qComboBox.getItems().addAll(qFood);
 		qComboBox.getSelectionModel().selectFirst();
@@ -213,5 +227,11 @@ public class InsertSceneController implements Initializable {
     public void btnComplete(ActionEvent actionEvent) {
 		int selectedIdComplete =oListView.getSelectionModel().getSelectedIndex();
 		oListView.getItems().remove(selectedIdComplete);
+	}
+	
+
+
+	public void insertNewFood(Food newFood){
+
 	}
 }
