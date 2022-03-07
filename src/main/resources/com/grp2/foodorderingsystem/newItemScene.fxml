@@ -13,7 +13,7 @@
       <TextField fx:id="newFoodCount" layoutX="39.0" layoutY="168.0" />
       <TextField fx:id="unitPrice" layoutX="218.0" layoutY="45.0" />
       <TextField fx:id="processTime" layoutX="218.0" layoutY="107.0" />
-      <Button layoutX="39.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnAddNewItem" prefHeight="25.0" prefWidth="330.0" text="Add Item" />
+      <Button layoutX="39.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnAddNewItem" prefHeight="25.0" prefWidth="263.0" text="Add Item" />
       <Label layoutX="39.0" layoutY="24.0" text="Food Name:" />
       <Label layoutX="41.0" layoutY="82.0" text="Food Code:" />
       <Label layoutX="40.0" layoutY="148.0" text="Item Count:" />
@@ -21,5 +21,6 @@
       <Label layoutX="218.0" layoutY="24.0" text="Unit Price:" />
       <Label layoutX="218.0" layoutY="82.0" text="Process Time:" />
       <ChoiceBox fx:id="cmbFoodType" layoutX="218.0" layoutY="168.0" prefWidth="150.0" />
+      <Button layoutX="317.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnClose" text="Close" />
    </children>
 </AnchorPane>

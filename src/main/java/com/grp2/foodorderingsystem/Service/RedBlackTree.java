@@ -1,7 +1,5 @@
 // Implementing Red-Black Tree in Java
 package com.grp2.foodorderingsystem.Service;
-import java.util.Scanner;
-import java.io.*;
 
 class Node {
     int data;

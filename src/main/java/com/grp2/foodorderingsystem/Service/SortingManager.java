@@ -2,7 +2,6 @@ package com.grp2.foodorderingsystem.Service;
 
 import com.grp2.foodorderingsystem.Model.Order;
 import com.grp2.foodorderingsystem.Model.OrderedFood;
-import com.grp2.foodorderingsystem.Service.RedBlackTree;
 
 import java.util.*;
 
@@ -24,7 +23,7 @@ public class SortingManager {
         OrderedFood riceAndCurriesWithOrderedCount = new OrderedFood("riceAndCurries", 700.00, 30,
                 "#001", "Sri Lankan", 5, 5);
         OrderedFood friedRiceWithOrderedCount = new OrderedFood("friedRice", 600.00, 20,
-                "#002", "Chinese",10, 10);
+                "#002", "Chinese", 10, 10);
         OrderedFood chickenKottuWithOrderedCount = new OrderedFood("chickenKottu", 550.00, 15,
                 "#003", "Indian", 8, 8);
         chickenKottuWithOrderedCount.setOrderedFoodCount(2);
@@ -58,7 +57,7 @@ public class SortingManager {
 
     // function to implement counting sort
     private void countingSort(List<Integer> totalWeightList, int n, int place) {
-        int[] output = new int[n+1];
+        int[] output = new int[n + 1];
         int[] count = new int[10];
 
         for (int i = 0; i < n; i++) {
@@ -94,7 +93,7 @@ public class SortingManager {
                     weightValue = weightValue + orderedFood.getWeight();
                 }
             }
-            if (orderNoWithOrderMap.size() >=  1) {
+            if (orderNoWithOrderMap.size() >= 1) {
                 for (int i = orderNoWithOrderMap.size(); i > 0; i--) {
                     Order previousOrder = orderNoWithOrderMap.get(i);
                     if (previousOrder == null) {
